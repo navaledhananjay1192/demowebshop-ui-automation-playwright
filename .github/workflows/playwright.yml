@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      BASE_URL: ${{ secrets.BASE_URL }}
+      BASE_URL: https://demowebshop.tricentis.com
       USERNAME: ${{ secrets.USERNAME }}
       PASSWORD: ${{ secrets.PASSWORD }}
     steps:
@@ -21,6 +21,12 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Validate test credentials
+      run: |
+        if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]; then
+          echo "::error::GitHub repository secrets USERNAME and PASSWORD must be configured."
+          exit 1
+        fi
     - name: Run Playwright tests
       run: npm run test:chromium
     - uses: actions/upload-artifact@v4

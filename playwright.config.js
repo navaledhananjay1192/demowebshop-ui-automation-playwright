@@ -2,7 +2,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config({
-  override: true,
+  override: !process.env.CI,
   path: `.env.${process.env.TEST_ENV || 'qa'}`
 })
 
