@@ -1,11 +1,14 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-require('dotenv').config({
+import dotenv from 'dotenv';
+dotenv.config({
+  override: true,
   path: `.env.${process.env.TEST_ENV || 'qa'}`
 })
 
 export default defineConfig({
   testDir: './tests',
+  outputDir: './test-results',
 
   expect:{
     timeout:15000,
@@ -20,12 +23,15 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: process.env.CI
+    ? [['line'], ['junit', { outputFile: 'test-results/junit.xml' }], ['html', { open: 'never' }]]
+    : [['list'], ['html', { open: 'never' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     trace: 'on-first-retry',
     baseURL : process.env.BASE_URL,
     headless: true,
+    screenshot: process.env.CI ? 'only-on-failure' : 'on',
   },
 
   /* Configure projects for major browsers */

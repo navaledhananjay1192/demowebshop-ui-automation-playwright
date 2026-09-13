@@ -1,0 +1,28 @@
+{
+  "login": {
+    "unknownEmail": "unknown.user@example.com",
+    "invalidPassword": "DefinitelyWrongPassword123!",
+    "errors": {
+      "loginUnsuccessful": "Login was unsuccessful. Please correct the errors and try again.",
+      "accountNotFound": "No customer account found"
+    }
+  },
+  "registration": {
+    "firstName": "Playwright",
+    "lastName": "Tester",
+    "password": "ValidPass123!",
+    "shortPassword": "short",
+    "mismatchedPassword": "DifferentPass123!",
+    "invalidEmail": "not-an-email",
+    "errors": {
+      "firstNameRequired": "First name is required.",
+      "lastNameRequired": "Last name is required.",
+      "emailRequired": "Email is required.",
+      "passwordRequired": "Password is required.",
+      "invalidEmail": "Wrong email",
+      "shortPassword": "The password should have at least 6 characters.",
+      "passwordMismatch": "The password and confirmation password do not match."
+    },
+    "successMessage": "Your registration completed"
+  }
+}
